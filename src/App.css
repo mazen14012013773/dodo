@@ -119,9 +119,8 @@ h1, h2, h3 { font-family: 'Cairo', 'Tajawal', sans-serif; }
 .scene-architecture { transform-origin: center; }
 .journey-scene-it .scene-architecture { opacity: .32; }
 .journey-scene-business .scene-architecture { opacity: .39; }
-.it-sculpture, .business-sculpture { transform-origin: 50% 50%; animation: scene-breathe 14s ease-in-out infinite alternate; }
-.journey-scene-business .business-sculpture { animation-delay: -4s; }
-.scene-overlay { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
+.it-sculpture, .business-sculpture { transform-origin: 50% 50%; }
+.scene-overlay { position: absolute; z-index: 2; inset: 0; pointer-events: none; will-change: transform; }
 .scene-topline { position: absolute; top: 28px; right: 31px; left: 31px; display: flex; align-items: center; justify-content: space-between; color: #e2ded7; font-size: 12px; }
 .scene-code { direction: ltr; font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: .08em; }
 .scene-status { display: inline-flex; align-items: center; gap: 8px; color: #c2c2be; }
@@ -298,7 +297,6 @@ h1, h2, h3 { font-family: 'Cairo', 'Tajawal', sans-serif; }
 .copyright { grid-column: 1 / -1; padding-top: 13px; border-top: 1px solid rgba(32,34,41,.09); color: #989a98; font-size: 11px; }
 
 @keyframes copy-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes scene-breathe { from { transform: translateY(0) scale(1); } to { transform: translateY(-5px) scale(1.008); } }
 
 @media (min-width: 1600px) {
   .hero-shell { min-height: 760px; }

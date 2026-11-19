@@ -18,16 +18,20 @@ export function JourneyScene({ path, transitionKey }: JourneySceneProps) {
 
     const context = gsap.context(() => {
       gsap.fromTo(scene,
-        { autoAlpha: 0.58, clipPath: 'inset(0 0 0 7%)', scale: 1.035 },
-        { autoAlpha: 1, clipPath: 'inset(0 0 0 0%)', scale: 1, duration: 1.05, ease: 'power4.out', clearProps: 'clipPath,transform' },
+        { autoAlpha: 0.76, scale: 1.018 },
+        { autoAlpha: 1, scale: 1, duration: 0.52, ease: 'power3.out', clearProps: 'transform,opacity,visibility' },
       )
       gsap.fromTo('.scene-note',
-        { y: 18, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.65, stagger: 0.08, ease: 'power3.out', delay: 0.18, clearProps: 'transform,opacity,visibility' },
+        { y: 10, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.34, stagger: 0.045, ease: 'power2.out', delay: 0.08, clearProps: 'transform,opacity,visibility' },
       )
       gsap.fromTo('.route-node',
-        { scale: 0.75, autoAlpha: 0, transformOrigin: '50% 50%' },
-        { scale: 1, autoAlpha: 1, duration: 0.48, stagger: 0.09, delay: 0.28, ease: 'back.out(1.5)', clearProps: 'transform,opacity,visibility' },
+        { scale: 0.82, autoAlpha: 0, transformOrigin: '50% 50%' },
+        { scale: 1, autoAlpha: 1, duration: 0.36, stagger: 0.055, delay: 0.12, ease: 'power2.out', clearProps: 'transform,opacity,visibility' },
+      )
+      gsap.fromTo('.journey-route-line',
+        { strokeDashoffset: 64 },
+        { strokeDashoffset: 0, duration: 0.72, delay: 0.08, ease: 'power2.out' },
       )
     }, scene)
 
@@ -100,7 +104,7 @@ export function JourneyScene({ path, transitionKey }: JourneySceneProps) {
             <path d="M-75 569C123 540 197 421 296 373 400 322 456 415 572 377 675 343 712 202 838 200c126-2 182 105 305 48" stroke={`url(#${uid}-edge)`} strokeWidth="3" strokeLinecap="round" />
             <path d="M-75 635C123 606 197 487 296 439 400 388 456 481 572 443 675 409 712 268 838 266c126-2 182 105 305 48" stroke={`url(#${uid}-edge)`} strokeWidth="2" strokeLinecap="round" opacity=".62" />
             <path d="M-75 599C123 570 197 451 296 403 400 352 456 445 572 407 675 373 712 232 838 230c126-2 182 105 305 48" stroke={`url(#${uid}-fine-lines)`} strokeWidth="140" strokeLinecap="round" opacity=".22" />
-            <path d="M-75 599C123 570 197 451 296 403 400 352 456 445 572 407 675 373 712 232 838 230c126-2 182 105 305 48" stroke={`url(#${uid}-route)`} strokeWidth="2" strokeLinecap="round" strokeDasharray="2 13" />
+            <path className="journey-route-line" d="M-75 599C123 570 197 451 296 403 400 352 456 445 572 407 675 373 712 232 838 230c126-2 182 105 305 48" stroke={`url(#${uid}-route)`} strokeWidth="2" strokeLinecap="round" strokeDasharray="2 13" />
             <g className="route-node" transform="translate(296 403)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
             <g className="route-node" transform="translate(572 407)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
             <g className="route-node" transform="translate(838 230)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
@@ -111,7 +115,7 @@ export function JourneyScene({ path, transitionKey }: JourneySceneProps) {
             <path d="M123 565 361 420 554 481 795 333 1078 446" stroke={`url(#${uid}-metal)`} strokeWidth="88" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M123 536 361 391 554 452 795 304 1078 417" stroke={`url(#${uid}-edge)`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M123 565 361 420 554 481 795 333 1078 446" stroke={`url(#${uid}-fine-lines)`} strokeWidth="82" strokeLinecap="round" strokeLinejoin="round" opacity=".21" />
-            <path d="M123 565 361 420 554 481 795 333 1078 446" stroke={`url(#${uid}-route)`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2 12" />
+            <path className="journey-route-line" d="M123 565 361 420 554 481 795 333 1078 446" stroke={`url(#${uid}-route)`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2 12" />
             <path d="M354 421v-160l122-73 125 39v234M783 335V158l128-66 130 46v350" stroke="#e1d8c8" strokeOpacity=".35" strokeWidth="1.4" />
             <path d="M354 261 476 333l125-72M354 316l122 72 125-72M783 158l128 71 130-91M783 214l128 73 130-91M783 272l128 72 130-91" stroke="#e1d8c8" strokeOpacity=".23" strokeWidth="1" />
             <g className="route-node" transform="translate(361 420)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>

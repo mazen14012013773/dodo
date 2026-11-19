@@ -82,7 +82,7 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis({
       autoRaf: false,
-      duration: 1.08,
+      duration: 0.68,
       smoothWheel: true,
       syncTouch: false,
       anchors: true,
@@ -115,17 +115,19 @@ function App() {
         .from('.hero-copy-animate', { y: 24, autoAlpha: 0, duration: 0.66, stagger: 0.075 }, '-=0.28')
         .from('.stage-info', { y: 14, autoAlpha: 0, duration: 0.52, stagger: 0.08 }, '-=0.46')
 
-      gsap.utils.toArray<HTMLElement>('.scroll-reveal').forEach((element) => {
-        gsap.fromTo(element,
-          { y: 34, autoAlpha: 0 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.78,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: element, start: 'top 88%', once: true },
-          },
-        )
+      gsap.set('.scroll-reveal', { y: 18, autoAlpha: 0 })
+      ScrollTrigger.batch('.scroll-reveal', {
+        start: 'top 91%',
+        once: true,
+        onEnter: (elements) => gsap.to(elements, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.48,
+          stagger: 0.045,
+          ease: 'power2.out',
+          overwrite: 'auto',
+          clearProps: 'transform,opacity,visibility',
+        }),
       })
 
       gsap.to('.journey-art', {
@@ -136,6 +138,29 @@ function App() {
     }, rootRef)
 
     return () => context.revert()
+  }, [])
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    const visual = rootRef.current?.querySelector<HTMLElement>('.hero-visual')
+    const overlay = visual?.querySelector<HTMLElement>('.scene-overlay')
+    if (!visual || !overlay) return
+
+    const xTo = gsap.quickTo(overlay, 'x', { duration: 0.32, ease: 'power2.out' })
+    const yTo = gsap.quickTo(overlay, 'y', { duration: 0.32, ease: 'power2.out' })
+    const onMove = (event: PointerEvent) => {
+      const bounds = visual.getBoundingClientRect()
+      xTo(((event.clientX - bounds.left) / bounds.width - 0.5) * 5)
+      yTo(((event.clientY - bounds.top) / bounds.height - 0.5) * 5)
+    }
+    const onLeave = () => { xTo(0); yTo(0) }
+    visual.addEventListener('pointermove', onMove, { passive: true })
+    visual.addEventListener('pointerleave', onLeave, { passive: true })
+    return () => {
+      visual.removeEventListener('pointermove', onMove)
+      visual.removeEventListener('pointerleave', onLeave)
+      gsap.killTweensOf(overlay)
+    }
   }, [])
 
   const handleTabKey = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
