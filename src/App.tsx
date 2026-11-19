@@ -144,22 +144,29 @@ function App() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
     const visual = rootRef.current?.querySelector<HTMLElement>('.hero-visual')
     const overlay = visual?.querySelector<HTMLElement>('.scene-overlay')
-    if (!visual || !overlay) return
+    const light = visual?.querySelector<HTMLElement>('.scene-light')
+    const scene = visual?.querySelector<HTMLElement>('.journey-scene')
+    if (!visual || !overlay || !light || !scene) return
 
-    const xTo = gsap.quickTo(overlay, 'x', { duration: 0.32, ease: 'power2.out' })
-    const yTo = gsap.quickTo(overlay, 'y', { duration: 0.32, ease: 'power2.out' })
+    const xTo = gsap.quickTo(overlay, 'x', { duration: 0.38, ease: 'power2.out' })
+    const yTo = gsap.quickTo(overlay, 'y', { duration: 0.38, ease: 'power2.out' })
+    const lightXTo = gsap.quickTo(light, 'x', { duration: 0.5, ease: 'power2.out' })
+    const lightYTo = gsap.quickTo(light, 'y', { duration: 0.5, ease: 'power2.out' })
     const onMove = (event: PointerEvent) => {
       const bounds = visual.getBoundingClientRect()
+      const sceneBounds = scene.getBoundingClientRect()
       xTo(((event.clientX - bounds.left) / bounds.width - 0.5) * 5)
       yTo(((event.clientY - bounds.top) / bounds.height - 0.5) * 5)
+      lightXTo(event.clientX - sceneBounds.left - 190)
+      lightYTo(event.clientY - sceneBounds.top - 190)
     }
-    const onLeave = () => { xTo(0); yTo(0) }
+    const onLeave = () => { xTo(0); yTo(0); lightXTo(0); lightYTo(0) }
     visual.addEventListener('pointermove', onMove, { passive: true })
     visual.addEventListener('pointerleave', onLeave, { passive: true })
     return () => {
       visual.removeEventListener('pointermove', onMove)
       visual.removeEventListener('pointerleave', onLeave)
-      gsap.killTweensOf(overlay)
+      gsap.killTweensOf([overlay, light])
     }
   }, [])
 

@@ -43,19 +43,19 @@ export function JourneyScene({ path, transitionKey }: JourneySceneProps) {
       <svg className="journey-art" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" fill="none">
         <defs>
           <radialGradient id={`${uid}-spot`} cx="57%" cy="39%" r="69%">
-            <stop offset="0" stopColor={it ? '#495268' : '#50443e'} />
-            <stop offset=".56" stopColor={it ? '#252b3b' : '#292a33'} />
-            <stop offset="1" stopColor="#15181e" />
+            <stop offset="0" stopColor={it ? '#6650bd' : '#a35432'} />
+            <stop offset=".56" stopColor={it ? '#34275e' : '#552b4b'} />
+            <stop offset="1" stopColor="#201b3a" />
           </radialGradient>
           <linearGradient id={`${uid}-metal`} x1=".1" y1=".08" x2=".94" y2=".84">
-            <stop stopColor="#4a211c" />
-            <stop offset=".16" stopColor="#e48e5c" />
-            <stop offset=".29" stopColor="#f4c49a" />
-            <stop offset=".43" stopColor="#7a3827" />
-            <stop offset=".58" stopColor="#cf7041" />
-            <stop offset=".76" stopColor="#3c2224" />
-            <stop offset=".91" stopColor="#e9a16e" />
-            <stop offset="1" stopColor="#623024" />
+            <stop stopColor="#4c2457" />
+            <stop offset=".16" stopColor="#f17a3d" />
+            <stop offset=".29" stopColor="#ffe09a" />
+            <stop offset=".43" stopColor="#a83d44" />
+            <stop offset=".58" stopColor="#ff9a45" />
+            <stop offset=".76" stopColor="#492355" />
+            <stop offset=".91" stopColor="#ffd27a" />
+            <stop offset="1" stopColor="#783044" />
           </linearGradient>
           <linearGradient id={`${uid}-edge`} x1="0" y1="0" x2="1" y2="0">
             <stop stopColor="#f8d4af" stopOpacity="0" />
@@ -64,13 +64,13 @@ export function JourneyScene({ path, transitionKey }: JourneySceneProps) {
             <stop offset="1" stopColor="#ffd4a8" stopOpacity="0" />
           </linearGradient>
           <linearGradient id={`${uid}-route`} x1=".02" y1=".1" x2=".9" y2=".9">
-            <stop stopColor="#f8c59d" />
-            <stop offset=".45" stopColor="#f48b4a" />
-            <stop offset="1" stopColor="#c14c2b" />
+            <stop stopColor="#ffe9ad" />
+            <stop offset=".45" stopColor="#ff9a42" />
+            <stop offset="1" stopColor="#ff6551" />
           </linearGradient>
           <radialGradient id={`${uid}-flare`}>
-            <stop stopColor="#f7a064" stopOpacity=".42" />
-            <stop offset="1" stopColor="#f7a064" stopOpacity="0" />
+            <stop stopColor="#ffc35b" stopOpacity=".56" />
+            <stop offset="1" stopColor="#ff8b50" stopOpacity="0" />
           </radialGradient>
           <filter id={`${uid}-soft`} x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="26" />
@@ -105,9 +105,9 @@ export function JourneyScene({ path, transitionKey }: JourneySceneProps) {
             <path d="M-75 635C123 606 197 487 296 439 400 388 456 481 572 443 675 409 712 268 838 266c126-2 182 105 305 48" stroke={`url(#${uid}-edge)`} strokeWidth="2" strokeLinecap="round" opacity=".62" />
             <path d="M-75 599C123 570 197 451 296 403 400 352 456 445 572 407 675 373 712 232 838 230c126-2 182 105 305 48" stroke={`url(#${uid}-fine-lines)`} strokeWidth="140" strokeLinecap="round" opacity=".22" />
             <path className="journey-route-line" d="M-75 599C123 570 197 451 296 403 400 352 456 445 572 407 675 373 712 232 838 230c126-2 182 105 305 48" stroke={`url(#${uid}-route)`} strokeWidth="2" strokeLinecap="round" strokeDasharray="2 13" />
-            <g className="route-node" transform="translate(296 403)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
-            <g className="route-node" transform="translate(572 407)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
-            <g className="route-node" transform="translate(838 230)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
+            <g className="route-node" transform="translate(296 403)"><circle r="22" fill={`url(#${uid}-flare)`}/><circle r="13" fill="#3b285b" stroke="#ffe3a0" strokeWidth="2"/><circle r="4" fill="#ffc45e"/></g>
+            <g className="route-node" transform="translate(572 407)"><circle r="22" fill={`url(#${uid}-flare)`}/><circle r="13" fill="#3b285b" stroke="#ffe3a0" strokeWidth="2"/><circle r="4" fill="#ffc45e"/></g>
+            <g className="route-node" transform="translate(838 230)"><circle r="22" fill={`url(#${uid}-flare)`}/><circle r="13" fill="#3b285b" stroke="#ffe3a0" strokeWidth="2"/><circle r="4" fill="#ffc45e"/></g>
           </g>
         ) : (
           <g className="business-sculpture" filter={`url(#${uid}-shadow)`}>
@@ -118,15 +118,16 @@ export function JourneyScene({ path, transitionKey }: JourneySceneProps) {
             <path className="journey-route-line" d="M123 565 361 420 554 481 795 333 1078 446" stroke={`url(#${uid}-route)`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2 12" />
             <path d="M354 421v-160l122-73 125 39v234M783 335V158l128-66 130 46v350" stroke="#e1d8c8" strokeOpacity=".35" strokeWidth="1.4" />
             <path d="M354 261 476 333l125-72M354 316l122 72 125-72M783 158l128 71 130-91M783 214l128 73 130-91M783 272l128 72 130-91" stroke="#e1d8c8" strokeOpacity=".23" strokeWidth="1" />
-            <g className="route-node" transform="translate(361 420)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
-            <g className="route-node" transform="translate(554 481)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
-            <g className="route-node" transform="translate(795 333)"><circle r="13" fill="#1b2028" stroke="#f2b28a" strokeWidth="2"/><circle r="3" fill="#f7a064"/></g>
+            <g className="route-node" transform="translate(361 420)"><circle r="22" fill={`url(#${uid}-flare)`}/><circle r="13" fill="#3b285b" stroke="#ffe3a0" strokeWidth="2"/><circle r="4" fill="#ffc45e"/></g>
+            <g className="route-node" transform="translate(554 481)"><circle r="22" fill={`url(#${uid}-flare)`}/><circle r="13" fill="#3b285b" stroke="#ffe3a0" strokeWidth="2"/><circle r="4" fill="#ffc45e"/></g>
+            <g className="route-node" transform="translate(795 333)"><circle r="22" fill={`url(#${uid}-flare)`}/><circle r="13" fill="#3b285b" stroke="#ffe3a0" strokeWidth="2"/><circle r="4" fill="#ffc45e"/></g>
           </g>
         )}
 
         <path d="M62 122h24M62 122v24M1138 122h-24M1138 122v24M62 638h24M62 638v-24M1138 638h-24M1138 638v-24" stroke="#eee8dd" strokeOpacity=".55" strokeWidth="1.5" />
       </svg>
 
+      <span className="scene-light" aria-hidden="true" />
       <div className="scene-overlay">
         <div className="scene-topline">
           <span className="scene-code scene-note">DC / JOURNEY {path.number}</span>
